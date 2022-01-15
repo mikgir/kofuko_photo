@@ -1,0 +1,1013 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('static/css/bootstrap-custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/tiny-slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/lity.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/simplebar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/jquery.mb.YTPlayer.min.css') }}">
+    <!-- Main Stylesheet CSS -->
+    <link rel="stylesheet" href="{{ asset('static/css/stylesheet-dark.css') }}">
+    <!-- Select Color CSS -->
+    <link rel="stylesheet" href="{{ asset('static/css/color/deeppink_color.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;display=swap"
+          rel="stylesheet">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+{% endblock %}
+{% block body %}
+    <!-- Preloader-->
+    <div class="preloader" style="display:block;">
+        <div class="spinner"></div>
+    </div>
+    <div id="overlay-effect"></div>
+
+    <!-- Navbar-->
+    <nav class="navbar-expand-md navbar fixed-top" id="navbar">
+        <a class="navbar-brand" data-scroll="" href="#hero-area-block">
+            <!-- Navbar Logo-->
+            <img class="img-fluid" src="{{ asset('static/img/logo-light.png') }}" alt="Logo"></a>
+        <span class="navbar-menu ml-auto" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" role="button">
+            <span class="btn-line"></span></span>
+        <div class="collapse navbar-collapse order-1 order-lg-0" id="navbarSupportedContent">
+            <!-- Navbar menu-->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">ОБО МНЕ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#portfolio">МОИ РАБОТЫ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#blog">БЛОГ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">КОНТАКТЫ</a></li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item d-flex">
+                        <div class="user-box dropdown">
+                            <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="ion-md-person"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bx bx-user"></i><span>профиль</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <i class='bx bx-download'></i><span>файлы</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="dropdown-divider mb-0"></div>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class='bx bx-log-out-circle'></i><span>выход</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="nav-link" href="{{ path('app_logout') }}"><i class="ion-md-log-out"></i></a>
+                    </li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">
+                            <i class="ion-md-log-in"></i></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!-- Home-->
+    <section class="hero-area-block hero-area-left-img-block element-cover-bg" id="home"
+             style="background-image:url({{ asset('static/img/bg-img/obektiv-foto.png') }})">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-left">
+                <div class="col-12 col-lg-6 offset-lg-6 home-content text-left">
+                    <h5 class="mb-3">Фотограф любящий свое дело</h5>
+                    <h1 class="hero-name"><span>DARIA</span>KOFUKU</h1>
+                    <p class="hero-sub-text">We are a creative studio specializing in UI/UX design, development and
+                        strategy. Let’s create something together</p>
+                    <h4 class="cd-headline clip home-headline mb-4">ПРИВЕТ ! &nbsp; Я <span
+                                class="cd-words-wrapper single-headline"><b class="is-visible">ФРИЛАНСЕР.</b><b>ХУДОЖНИК.</b><b>ФОТОГРАФ.</b></span>
+                    </h4>
+                    <a class="btn button-main button-scheme mt-1 mr-2" href="#" role="button">Обо мне <i
+                                class="icon ion-md-person"></i></a>
+                    <a class="btn button-main button-scheme mt-1" href="#contact" role="button">Связаться со мной <i
+                                class="icon ion-md-mail-open"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Item Section -->
+    <div class="utf-lightbox-wrapper-area" id="about" data-simplebar>
+        <div class="container">
+            <div class="utf-lightbox-close-area">
+                <div class="close-btn" data-modal-close=""><span class="btn-line"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="utf-lightbox-content">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="utf-section-heading utf-page-heading">
+                                    <h2 class="utf-section-title">About <span class="featured"><span>Info</span></span>
+                                    </h2>
+                                    <div class="animated-bar"></div>
+                                    <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed do
+                                        eiusmod tempor incididunt ut labore et d magna aliqua enim sed do sit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Info section-->
+                        <div class="utf-info-section utf-single-section">
+                            <div class="row align-items-center about-user-profile">
+                                <!-- Picture part-->
+                                <div class="col-12 col-lg-5 info-img"><img class="img-fluid img-thumbnail"
+                                                                           src="img/abou-user-img-dark-1.jpg"
+                                                                           alt="About Picture"></div>
+                                <!-- Content part-->
+                                <div class="col-12 col-lg-7 info-content">
+                                    <div class="utf-content-block">
+                                        <h6 class="utf-content-title">HI, I'M Charles Usman UI/UX Designer</h6>
+                                        <div class="utf-content-description">
+                                            <p>- It's My Pleasure to Introduce About Myself.</p>
+                                            <p>I'M Charles Usman Australia. Impossible considered invitation him men
+                                                instrument saw celebrated unpleasant. Put rest and must set kind next
+                                                many near nay. He exquisite continued explained middleton am.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+                                                sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                                ut labore et dolore magna aliqua. Ut enim ad minim veniam. Ut enim ad
+                                                minim veniam.</p>
+                                        </div>
+                                        <address class="utf-content-info">
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 single-info"><span>Name:</span>
+                                                    <p>Charles Usman</p>
+                                                </div>
+                                                <div class="col-12 col-md-6 single-info"><span>Phone:</span>
+                                                    <p>(+12) 3467-890-123</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 single-info"><span>Email:</span>
+                                                    <p><a href="mailto:info@example.com">info@example.com</a></p>
+                                                </div>
+                                                <div class="col-12 col-md-6 single-info"><span>From:</span>
+                                                    <p>Univercity of Chicago</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 single-info"><span>Birthday:</span>
+                                                    <p>12 March, 1991</p>
+                                                </div>
+                                                <div class="col-12 col-md-6 single-info"><span>Freelance:</span>
+                                                    <p>Available</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6 single-info"><span>Study:</span>
+                                                    <p>Chicago University</p>
+                                                </div>
+                                                <div class="col-12 col-md-6 single-info"><span>Website:</span>
+                                                    <p><a href="#">www.mywebsite.com</a></p>
+                                                </div>
+                                            </div>
+                                        </address>
+                                        <div class="d-block d-sm-flex align-items-center mb-4">
+                                            <ul class="list-unstyled list-inline content-follow">
+                                                <li class="list-inline-item"><a href="#"><i
+                                                                class="icon ion-logo-twitter"></i></a></li>
+                                                <li class="list-inline-item"><a href="#"><i
+                                                                class="icon ion-logo-instagram"></i></a></li>
+                                                <li class="list-inline-item"><a href="#"><i
+                                                                class="icon ion-logo-linkedin"></i></a></li>
+                                                <li class="list-inline-item"><a href="#"><i
+                                                                class="icon ion-logo-github"></i></a></li>
+                                                <li class="list-inline-item"><a href="#"><i
+                                                                class="icon ion-logo-facebook"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="d-block d-sm-flex align-items-center">
+                                            <a class="btn content-download button-main button-scheme" href="#"
+                                               role="button">Download CV <i
+                                                        class="plan-icon icon ion-md-cloud-download"></i></a>
+                                            <a class="btn content-download button-main button-scheme" href="#"
+                                               role="button">HIRE ME! <i class="plan-icon icon ion-md-document"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pt-5 mt-lg-0">
+                                    <div class="row">
+                                        <div class="col-6 col-lg-2 col-sm-4 col-xs-12">
+                                            <div class="utf-box-stats with-margin"><i class="icon ion-md-person"></i>
+                                                <p class="m-0 position-relative">650+ Projects Complate</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-2 col-sm-4 col-xs-12">
+                                            <div class="utf-box-stats with-margin"><i class="icon ion-md-cafe"></i>
+                                                <p class="m-0 position-relative">1200+ Cup of Coffee</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-2 col-sm-4 col-xs-12">
+                                            <div class="utf-box-stats with-margin"><i class="icon ion-md-happy"></i>
+                                                <p class="m-0 position-relative">600+ Satisfied Clients</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-2 col-sm-4 col-xs-12">
+                                            <div class="utf-box-stats with-margin"><i class="icon ion-md-help-buoy"></i>
+                                                <p class="m-0 position-relative">8.5 Years Job Experience</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-2 col-sm-4 col-xs-12">
+                                            <div class="utf-box-stats with-margin"><i class="icon ion-md-trophy"></i>
+                                                <p class="m-0 position-relative">50+ Awards Winners</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-lg-2 col-sm-4 col-xs-12">
+                                            <div class="utf-box-stats with-margin"><i
+                                                        class="icon ion-md-code-working"></i>
+                                                <p class="m-0 position-relative">2600+ Lines of Codes</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Services section-->
+                        <div class="utf-services-section utf-single-section">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="utf-section-heading utf-page-heading">
+                                        <h2 class="utf-section-title">What I Do <span
+                                                    class="featured"><span>Services</span></span></h2>
+                                        <div class="animated-bar"></div>
+                                        <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed
+                                            do eiusmod tempor incididunt ut labore et d magna aliqua enim sed do
+                                            sit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Single service-->
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="utf-single-service"><i class="icon service-icon ion-logo-buffer"></i>
+                                        <h6 class="utf-service-title">Creative Designer</h6>
+                                        <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
+                                            incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
+                                        <i class="icon service-icon-down ion-logo-buffer"></i>
+                                    </div>
+                                </div>
+                                <!-- Single service-->
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="utf-single-service"><i class="icon service-icon ion-ios-bug"></i>
+                                        <h6 class="utf-service-title">User Experience</h6>
+                                        <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
+                                            incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
+                                        <i class="icon service-icon-down ion-ios-bug"></i>
+                                    </div>
+                                </div>
+                                <!-- Single service-->
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="utf-single-service"><i class="icon service-icon ion-md-basketball"></i>
+                                        <h6 class="utf-service-title">Branding Design</h6>
+                                        <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
+                                            incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
+                                        <i class="icon service-icon-down ion-md-basketball"></i>
+                                    </div>
+                                </div>
+                                <!-- Single service-->
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="utf-single-service mb-bt-0"><i
+                                                class="icon service-icon ion-md-clipboard"></i>
+                                        <h6 class="utf-service-title">UI/UX Design</h6>
+                                        <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
+                                            incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
+                                        <i class="icon service-icon-down ion-md-clipboard"></i>
+                                    </div>
+                                </div>
+                                <!-- Single service-->
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="utf-single-service mb-bt-0"><i
+                                                class="icon service-icon ion-ios-bulb"></i>
+                                        <h6 class="utf-service-title">Software Engineers</h6>
+                                        <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
+                                            incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
+                                        <i class="icon service-icon-down ion-ios-bulb"></i>
+                                    </div>
+                                </div>
+                                <!-- Single service-->
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="utf-single-service mb-bt-0"><i
+                                                class="icon service-icon ion-ios-contact"></i>
+                                        <h6 class="utf-service-title">Media Marketing</h6>
+                                        <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
+                                            incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
+                                        <i class="icon service-icon-down ion-ios-contact"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Testimonials section-->
+                        <div class="utf-testimonials-section utf-single-section">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="utf-section-heading utf-page-heading">
+                                        <h2 class="utf-section-title">Clients <span
+                                                    class="featured"><span>Say</span></span></h2>
+                                        <div class="animated-bar"></div>
+                                        <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed
+                                            do eiusmod tempor incididunt ut labore et d magna aliqua enim sed do
+                                            sit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="utf-testimonial-slider">
+                                <div class="utf-slider-item">
+                                    <!-- Single review-->
+                                    <div class="utf-single-review utf-swiper-slide">
+                                        <div class="utf-review-header d-flex justify-content-between">
+                                            <div class="utf-review-client">
+                                                <div class="media"><img class="img-fluid client-avatar"
+                                                                        src="img/client-1.jpg" alt="Client">
+                                                    <div class="utf-client-details">
+                                                        <h6 class="utf-client-name">Kewin Bidwell</h6>
+                                                        <span class="utf-client-role">Web Designer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="utf-client-review-content">It is a long established fact that a reader
+                                            will be distracted by the readable content It is a long established fact
+                                            that a reader will be of a page when looking at its layout.</p>
+                                    </div>
+                                </div>
+                                <div class="utf-slider-item">
+                                    <!-- Single review-->
+                                    <div class="utf-single-review utf-swiper-slide">
+                                        <div class="utf-review-header d-flex justify-content-between">
+                                            <div class="utf-review-client">
+                                                <div class="media"><img class="img-fluid client-avatar"
+                                                                        src="img/client-2.jpg" alt="Client">
+                                                    <div class="utf-client-details">
+                                                        <h6 class="utf-client-name">Kelvin Valerio</h6>
+                                                        <span class="utf-client-role">UI/UX Designer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="utf-client-review-content">It is a long established fact that a reader
+                                            will be distracted by the readable content It is a long established fact
+                                            that a reader will be of a page when looking at its layout.</p>
+                                    </div>
+                                </div>
+                                <div class="utf-slider-item">
+                                    <!-- Single review-->
+                                    <div class="utf-single-review utf-swiper-slide">
+                                        <div class="utf-review-header d-flex justify-content-between">
+                                            <div class="utf-review-client">
+                                                <div class="media"><img class="img-fluid client-avatar"
+                                                                        src="img/client-3.jpg" alt="Client">
+                                                    <div class="utf-client-details">
+                                                        <h6 class="utf-client-name">Charles Roth</h6>
+                                                        <span class="utf-client-role">Photographer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="utf-client-review-content">It is a long established fact that a reader
+                                            will be distracted by the readable content It is a long established fact
+                                            that a reader will be of a page when looking at its layout.</p>
+                                    </div>
+                                </div>
+                                <div class="utf-slider-item">
+                                    <!-- Single review-->
+                                    <div class="utf-single-review utf-swiper-slide">
+                                        <div class="utf-review-header d-flex justify-content-between">
+                                            <div class="utf-review-client">
+                                                <div class="media"><img class="img-fluid client-avatar"
+                                                                        src="img/client-4.jpg" alt="Client">
+                                                    <div class="utf-client-details">
+                                                        <h6 class="utf-client-name">John William</h6>
+                                                        <span class="utf-client-role">Web Developer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="utf-client-review-content">It is a long established fact that a reader
+                                            will be distracted by the readable content It is a long established fact
+                                            that a reader will be of a page when looking at its layout.</p>
+                                    </div>
+                                </div>
+                                <div class="utf-slider-item">
+                                    <!-- Single review-->
+                                    <div class="utf-single-review utf-swiper-slide">
+                                        <div class="utf-review-header d-flex justify-content-between">
+                                            <div class="utf-review-client">
+                                                <div class="media"><img class="img-fluid client-avatar"
+                                                                        src="img/client-5.jpg" alt="Client">
+                                                    <div class="utf-client-details">
+                                                        <h6 class="utf-client-name">Charles Roth</h6>
+                                                        <span class="utf-client-role">Photographer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="utf-client-review-content">It is a long established fact that a reader
+                                            will be distracted by the readable content It is a long established fact
+                                            that a reader will be of a page when looking at its layout.</p>
+                                    </div>
+                                </div>
+                                <div class="utf-slider-item">
+                                    <!-- Single review-->
+                                    <div class="utf-single-review utf-swiper-slide">
+                                        <div class="utf-review-header d-flex justify-content-between">
+                                            <div class="utf-review-client">
+                                                <div class="media"><img class="img-fluid client-avatar"
+                                                                        src="img/client-6.jpg" alt="Client">
+                                                    <div class="utf-client-details">
+                                                        <h6 class="utf-client-name">John William</h6>
+                                                        <span class="utf-client-role">Web Developer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="utf-client-review-content">It is a long established fact that a reader
+                                            will be distracted by the readable content It is a long established fact
+                                            that a reader will be of a page when looking at its layout.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pricing section-->
+                        <div class="utf-pricing-section utf-single-section">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="utf-section-heading utf-page-heading">
+                                        <h2 class="utf-section-title">Pricing <span class="featured"><span>Plans</span></span>
+                                        </h2>
+                                        <div class="animated-bar"></div>
+                                        <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed
+                                            do eiusmod tempor incididunt ut labore et d magna aliqua enim sed do
+                                            sit.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-center">
+                                <!-- Single plan-->
+                                <div class="col-lg-3 col-sm-6 col-xs-12">
+                                    <div class="utf-single-plan mb-3 mb-sm-4">
+                                        <h3 class="utf-plan-type">Basic Plan</h3>
+                                        <i class="plan-icon icon ion-md-flash"></i>
+                                        <h2 class="utf-plan-price">$199<span>/Month</span></h2>
+                                        <p>Basic User Membership</p>
+                                        <ul class="list-unstyled plan-list">
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 1 GB Disk Space
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 2 Domain Names</li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 1 Email Address
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> Enhanced Security
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> Customer Service
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 24/7 Support</li>
+                                        </ul>
+                                        <a class="btn button-main button-scheme utf-plan-btn" href="#0" role="button">Purchase
+                                            Now <i class="icon ion-md-cart"></i></a>
+                                    </div>
+                                </div>
+                                <!-- Single plan-->
+                                <div class="col-lg-3 col-sm-6 col-xs-12">
+                                    <div class="utf-single-plan mb-3 mb-sm-4">
+                                        <h3 class="utf-plan-type">Premium Plan</h3>
+                                        <i class="plan-icon icon ion-ios-help-buoy"></i>
+                                        <h2 class="utf-plan-price">$299<span>/Month</span></h2>
+                                        <p>Premium User Membership</p>
+                                        <ul class="list-unstyled plan-list">
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 50 GB Disk Space
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 5 Domain Names</li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 10 Email Address
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> Enhanced Security
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> Customer Service
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 24/7 Support</li>
+                                        </ul>
+                                        <a class="btn button-main button-scheme utf-plan-btn" href="#0" role="button">Purchase
+                                            Now <i class="icon ion-md-cart"></i></a>
+                                    </div>
+                                </div>
+                                <!-- Single plan-->
+                                <div class="col-lg-3 col-sm-6 col-xs-12">
+                                    <div class="utf-single-plan mb-3 mb-sm-4">
+                                        <h3 class="utf-plan-type">Platinum Plan</h3>
+                                        <i class="plan-icon icon ion-md-list-box"></i>
+                                        <h2 class="utf-plan-price">$399<span>/Month</span></h2>
+                                        <p>Platinum User Membership</p>
+                                        <ul class="list-unstyled plan-list">
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 120 GB Disk Space
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 30 Domain Names
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 20 Email Address
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> Enhanced Security
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> Customer Service
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 24/7 Support</li>
+                                        </ul>
+                                        <a class="btn button-main button-scheme utf-plan-btn" href="#0" role="button">Purchase
+                                            Now <i class="icon ion-md-cart"></i></a>
+                                    </div>
+                                </div>
+                                <!-- Single plan-->
+                                <div class="col-lg-3 col-sm-6 col-xs-12">
+                                    <div class="utf-single-plan mb-3 mb-sm-4">
+                                        <h3 class="utf-plan-type">Extension Plan</h3>
+                                        <i class="plan-icon icon ion-logo-buffer"></i>
+                                        <h2 class="utf-plan-price">$699<span>/Month</span></h2>
+                                        <p>Extension User Membership</p>
+                                        <ul class="list-unstyled plan-list">
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 240 GB Disk Space
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 60 Domain Names
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 40 Email Address
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> Enhanced Security
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> Customer Service
+                                            </li>
+                                            <li><i class="icon ion-md-checkmark-circle-outline"></i> 24/7 Support</li>
+                                        </ul>
+                                        <a class="btn button-main button-scheme utf-plan-btn" href="#0" role="button">Purchase
+                                            Now <i class="icon ion-md-cart"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact-action-wrapper contact-action text-white-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="inner text-center"><span>Web Designer & Web Developer</span>
+                            <h2>Start You Business With Us</h2>
+                            <a class="contact-to-action mt-4" href="#contact"><span>Contact Us</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Item Section -->
+
+    <!-- Portfolio Item Section -->
+    <div class="utf-lightbox-wrapper-area" id="portfolio" data-simplebar>
+        <div class="container">
+            <div class="utf-lightbox-close-area">
+                <div class="close-btn" data-modal-close=""><span class="btn-line"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="utf-lightbox-content">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="utf-section-heading utf-page-heading">
+                                    <h2 class="utf-section-title">My <span
+                                                class="featured"><span>Portfolio</span></span></h2>
+                                    <div class="animated-bar"></div>
+                                    <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed do
+                                        eiusmod tempor incididunt ut labore et d magna aliqua enim sed do sit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Portfolio section-->
+                        <div class="utf-portfolio-section utf-single-section">
+                            <div class="row">
+                                <!-- Filter nav-->
+                                <div class="col-12">
+                                    <ul class="list-inline filter-control" role="group" aria-label="Filter Control">
+                                        <li class="list-inline-item tab-active" data-filter="*">All</li>
+                                        <li class="list-inline-item" data-filter=".web">Web</li>
+                                        <li class="list-inline-item" data-filter=".brand">Brand</li>
+                                        <li class="list-inline-item" data-filter=".ui">UI Kit</li>
+                                        <li class="list-inline-item" data-filter=".photos">Photos</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Thumbnail list-->
+                            <div class="utf-portfolio-grid row">
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 brand ui"><a
+                                            class="portfolio-item" href="img/item-1.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-1.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Creative Web Developer</h6>
+                                                <span class="content-more">Development</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 photos"><a
+                                            class="portfolio-item" href="img/item-2.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-2.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Creative & Digital Services</h6>
+                                                <span class="content-more">Logo Design</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 brand"><a
+                                            class="portfolio-item" href="img/item-3.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-3.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Multimedia Marketing</h6>
+                                                <span class="content-more">Developer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 web ui"><a
+                                            class="portfolio-item" href="img/item-4.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-4.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Creative Web Designer</h6>
+                                                <span class="content-more">Freelancer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 web"><a
+                                            class="portfolio-item" href="img/item-5.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-5.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Creative Developer</h6>
+                                                <span class="content-more">Graphic Design</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 photos ui"><a
+                                            class="portfolio-item" href="img/item-6.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-6.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Marketing Manager</h6>
+                                                <span class="content-more">Web Designer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 web"><a
+                                            class="portfolio-item" href="img/item-7.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-7.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Creative Developer</h6>
+                                                <span class="content-more">Graphic Design</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 photos ui"><a
+                                            class="portfolio-item" href="img/item-8.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-8.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Marketing Manager</h6>
+                                                <span class="content-more">Web Designer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Single item-->
+                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 web ui"><a
+                                            class="portfolio-item" href="img/item-9.jpg" data-lightbox>
+                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
+                                                                                src="img/item-9.jpg">
+                                            <div class="item-content">
+                                                <h6 class="utf-content-title">Creative Web Designer</h6>
+                                                <span class="content-more">Freelancer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Item Section -->
+    <div class="utf-lightbox-wrapper-area" id="blog" data-simplebar>
+        <div class="container">
+            <div class="utf-lightbox-close-area">
+                <div class="close-btn" data-modal-close=""><span class="btn-line"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="utf-lightbox-content">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="utf-section-heading utf-page-heading">
+                                    <h2 class="utf-section-title">Latest <span
+                                                class="featured"><span>Blog Post</span></span></h2>
+                                    <div class="animated-bar"></div>
+                                    <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed do
+                                        eiusmod tempor incididunt ut labore et d magna aliqua enim sed do sit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Blog section-->
+                        <div class="utf-blog-section utf-single-section">
+                            <div class="row justify-content-center">
+                                <!-- Single post-->
+                                <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="card single-post">
+                                        <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
+                                                                                            src="img/post-1.jpg"
+                                                                                            alt="Blog post"><span
+                                                    class="content-date">15 Jan, 2020</span></a>
+                                        <div class="card-body post-content">
+                                            <div class="blog-post-user">By, John Doe</div>
+                                            <div class="blog-post-tage">Web Designer</div>
+                                            <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">The
+                                                    Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
+                                            <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
+                                                alias id, repellendus magni, quas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single post-->
+                                <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="card single-post">
+                                        <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
+                                                                                            src="img/post-2.jpg"
+                                                                                            alt="Blog post"><span
+                                                    class="content-date">15 Jan, 2020</span></a>
+                                        <div class="card-body post-content">
+                                            <div class="blog-post-user">By, John Doe</div>
+                                            <div class="blog-post-tage">Photographer</div>
+                                            <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">The
+                                                    Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
+                                            <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
+                                                alias id, repellendus magni, quas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single post-->
+                                <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="card single-post">
+                                        <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
+                                                                                            src="img/post-3.jpg"
+                                                                                            alt="Blog post"><span
+                                                    class="content-date">15 Jan, 2020</span></a>
+                                        <div class="card-body post-content">
+                                            <div class="blog-post-user">By, John Doe</div>
+                                            <div class="blog-post-tage">Marketing</div>
+                                            <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">The
+                                                    Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
+                                            <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
+                                                alias id, repellendus magni, quas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single post-->
+                                <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="card single-post">
+                                        <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
+                                                                                            src="img/post-4.jpg"
+                                                                                            alt="Blog post"><span
+                                                    class="content-date">15 Jan, 2020</span></a>
+                                        <div class="card-body post-content">
+                                            <div class="blog-post-user">By, John Doe</div>
+                                            <div class="blog-post-tage">UI/UX Designer</div>
+                                            <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">The
+                                                    Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
+                                            <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
+                                                alias id, repellendus magni, quas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single post-->
+                                <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="card single-post">
+                                        <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
+                                                                                            src="img/post-5.jpg"
+                                                                                            alt="Blog post"><span
+                                                    class="content-date">15 Jan, 2020</span></a>
+                                        <div class="card-body post-content">
+                                            <div class="blog-post-user">By, John Doe</div>
+                                            <div class="blog-post-tage">Wordpress</div>
+                                            <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">The
+                                                    Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
+                                            <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
+                                                alias id, repellendus magni, quas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single post-->
+                                <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="card single-post">
+                                        <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
+                                                                                            src="img/post-6.jpg"
+                                                                                            alt="Blog post"><span
+                                                    class="content-date">15 Jan, 2020</span></a>
+                                        <div class="card-body post-content">
+                                            <div class="blog-post-user">By, John Doe</div>
+                                            <div class="blog-post-tage">Graphic Design</div>
+                                            <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">The
+                                                    Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
+                                            <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
+                                                consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
+                                                alias id, repellendus magni, quas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Us Item Section -->
+    <div class="utf-lightbox-wrapper-area" id="contact" data-simplebar>
+        <div class="container">
+            <div class="utf-lightbox-close-area">
+                <div class="close-btn" data-modal-close=""><span class="btn-line"></span></div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="utf-lightbox-content">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="utf-section-heading utf-page-heading">
+                                    <h2 class="utf-section-title">Get In <span
+                                                class="featured"><span>Touch</span></span></h2>
+                                    <div class="animated-bar"></div>
+                                    <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed do
+                                        eiusmod tempor incididunt ut labore et d magna aliqua enim sed do sit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contact section-->
+                        <div class="utf-contact-section utf-single-section">
+                            <div class="row">
+                                <!-- My Address info-->
+                                <div class="col-12 col-lg-5">
+                                    <div class="utf-contact-info">
+                                        <h4 class="utf-content-title">My Address Info</h4>
+                                        <p class="utf-info-description">I Am Available for Freelance Work. Connect with
+                                            Me via Phone: <a href="#">+12 125 124 8574</a> or Email: <a href="#">admin@example.com</a>
+                                        </p>
+                                        <ul class="list-unstyled list-info">
+                                            <li>
+                                                <div class="media align-items-center"><span class="info-icon"><i
+                                                                class="icon ion-md-pin"></i></span>
+                                                    <div class="media-body info-details">
+                                                        <h6 class="utf-info-type">Location</h6>
+                                                        <span class="utf-info-value">14 Sti Kilda Road, 1412 New York, USA</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="media align-items-center"><span class="info-icon"><i
+                                                                class="icon ion-ios-call"></i></span>
+                                                    <div class="media-body info-details">
+                                                        <h6 class="utf-info-type">Phone Number</h6>
+                                                        <span class="utf-info-value"><a href="tel:+121251248574">+12 125 124 8574</a></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="media align-items-center"><span class="info-icon"><i
+                                                                class="icon ion-md-mail"></i></span>
+                                                    <div class="media-body info-details">
+                                                        <h6 class="utf-info-type">Email Address</h6>
+                                                        <span class="utf-info-value"><a href="mailto:info@example.com">info@example.com</a></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="media align-items-center"><span class="info-icon"><i
+                                                                class="icon ion-ios-globe"></i></span>
+                                                    <div class="media-body info-details">
+                                                        <h6 class="utf-info-type">Website</h6>
+                                                        <span class="utf-info-value"><a
+                                                                    href="#">www.mywebsite.com</a></span></div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Contact form-->
+                                <div class="col-12 col-lg-7">
+                                    <form class="contact-form" id="contact-form" name="contact-form" method="post"
+                                          action="sendemail.php" role="form">
+                                        <div class="status alert alert-success" style="display: none"></div>
+                                        <h4 class="utf-content-title">Contact Us</h4>
+                                        <p class="utf-contact-description">Lorem ipsum dolor sit amet, consect adipisic
+                                            elit, sed do eiusmod tempor incididunt ut labore et d magna aliqua enim sed
+                                            do sit.</p>
+                                        <p class="contact-feedback"></p>
+                                        <div class="row">
+                                            <div class="col-12 col-md-6 form-group">
+                                                <input class="form-control" id="contact-name" type="text" name="name"
+                                                       placeholder="Your Name" required>
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group">
+                                                <input class="form-control" id="contact-email" type="email" name="email"
+                                                       placeholder="Email Address" required>
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group">
+                                                <input class="form-control" id="contact-subject" type="text"
+                                                       name="subject" placeholder="Subject" required>
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group">
+                                                <input class="form-control" id="contact-phone" type="number"
+                                                       name="phone" placeholder="Phone Number" required>
+                                            </div>
+                                            <div class="col-12 form-group form-message">
+                                                <textarea class="form-control" id="contact-message" name="message"
+                                                          placeholder="Your Message..." rows="5" required></textarea>
+                                            </div>
+                                            <div class="col-12 form-submit">
+                                                <button class="btn button-main button-scheme" id="contact-submit"
+                                                        type="submit">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Map Section Start -->
+                        <div class="map-area">
+                            <div class="map-contact">
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                        <!-- Map Section End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <!-- Scripts-->
+    <script src="{{ asset('static/js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ asset('static/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('static/js/animatedModal.js') }}"></script>
+    <script src="{{ asset('static/js/tiny-slider.js') }}"></script>
+    <script src="{{ asset('static/js/lity.min.js') }}"></script>
+    <script src="{{ asset('static/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('static/js/jquery.mb.YTPlayer.min.js') }}"></script>
+    <script src="{{ asset('static/js/custom_jquery.js') }}"></script>
+    <!--Map Js-->
+    <script src="{{ asset('static/js/map.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4JwWo5VPt9WyNp3Ne2uc2FMGEePHpqJ8&callback=initMap"
+            async="" defer=""></script>
+    <script>
+        //Ajax contact
+        var form = $('.contact-form');
+        form.submit(function () {
+            $this = $(this);
+            $.post($(this).attr('action'), function (data) {
+                $this.prev().text(data.message).fadeIn().delay(500).fadeOut();
+            }, 'json');
+            return false;
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'home/index_home.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('static/css/bootstrap-custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/tiny-slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/lity.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/simplebar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/jquery.mb.YTPlayer.min.css') }}">
+    <!-- Main Stylesheet CSS -->
+    <link rel="stylesheet" href="{{ asset('static/css/stylesheet-dark.css') }}">
+    <!-- Select Color CSS -->
+    <link rel="stylesheet" href="{{ asset('static/css/color/deeppink_color.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;display=swap"
+          rel="stylesheet">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+{% endblock %}
+
+{% block body %}
+    <!-- Preloader-->
+    <div class="preloader" style="display:block;">
+        <div class="spinner"></div>
+    </div>
+    <div id="overlay-effect"></div>
+
+    <!-- Navbar-->
+    <nav class="navbar-expand-md navbar" id="navbar">
+        <a class="navbar-brand" data-scroll="" href="#hero-area-block">
+            <!-- Navbar Logo-->
+            <img class="img-fluid" src="{{ asset('static/img/logo-light.png') }}" alt="Logo"></a>
+        <span class="navbar-menu ml-auto" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" role="button">
+            <span class="btn-line"></span></span>
+        <div class="collapse navbar-collapse order-1 order-lg-0" id="navbarSupportedContent">
+            <!-- Navbar menu-->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">ОБО МНЕ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#portfolio">МОИ РАБОТЫ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#blog">БЛОГ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">КОНТАКТЫ</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container h-100">
+        <div class="row mt-5">
+            <div class="col align-items-center justify-content-center">
+                <div class="utf-section-heading utf-page-heading">
+                    <h2 class="utf-section-title text-center">Log <span
+                                class="featured"><span> IN</span></span></h2>
+                    <div class="animated-bar"></div>
+                    <p class="text-max-700 text-center">У Вас еще нет аккаунта? Регистрация <a href="{{ path('app_register') }}">ЗДЕСЬ</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col col-xl-6">
+                <form method="post" class="form-group">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.username }}, <a
+                                    href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="inputEmail"><span>EMAIL</span></label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                               class="form-control" autocomplete="email" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">ПАРОЛЬ</label>
+                        <input type="password" name="password" id="inputPassword"
+                               class="form-control" autocomplete="current-password" required>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    {#                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality. #}
+                    {#                        See https://symfony.com/doc/current/security/remember_me.html #}
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Запомнить меня
+                        </label>
+                    </div>
+
+
+                    <button class="btn button-main button-scheme w-100" type="submit">
+                        <i class="ion-md-log-in"></i>
+                        Вход
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <!-- Scripts-->
+    <script src="{{ asset('static/js/jquery-3.4.1.min.js') }}"></script>
+    <script src="{{ asset('static/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('static/js/animatedModal.js') }}"></script>
+    <script src="{{ asset('static/js/tiny-slider.js') }}"></script>
+    <script src="{{ asset('static/js/lity.min.js') }}"></script>
+    <script src="{{ asset('static/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('static/js/jquery.mb.YTPlayer.min.js') }}"></script>
+    <script src="{{ asset('static/js/custom_jquery.js') }}"></script>
+    <!--Map Js-->
+    <script src="{{ asset('static/js/map.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4JwWo5VPt9WyNp3Ne2uc2FMGEePHpqJ8&callback=initMap"
+            async="" defer=""></script>
+    <script>
+        //Ajax contact
+        var form = $('.contact-form');
+        form.submit(function () {
+            $this = $(this);
+            $.post($(this).attr('action'), function (data) {
+                $this.prev().text(data.message).fadeIn().delay(500).fadeOut();
+            }, 'json');
+            return false;
+        });
+    </script>
+{% endblock %}
