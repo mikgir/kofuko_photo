@@ -1,20 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/index_admin.html.twig' %}
 
 {% block title %}{{ title }}{% endblock %}
-{% block stylesheets %}
-    <link href="{{ asset('static/Admin/css/pace.min.css') }}" rel="stylesheet" />
-    <script src="{{ asset('static/Admin/js/pace.min.js') }}"></script>
-    <!--plugins-->
-    <link href="{{ asset('static/Admin/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('static/Admin/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('static/Admin/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('static/Admin/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
-    <!-- Bootstrap CSS -->
-    <link href="{{ asset('static/Admin/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('static/Admin/css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('static/Admin/css/icons.css') }}" rel="stylesheet">
-
-{% endblock %}
 
 {% block body %}
     <div class="wrapper">
@@ -57,7 +43,7 @@
                         </li>
                         <li><a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Чат</a>
                         </li>
-                        <li><a href="{{ path('admin_image') }}"><i class="bx bx-right-arrow-alt"></i>Файл менеджер</a>
+                        <li><a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>Файл менеджер</a>
                         </li>
                         <li><a href="app-contact-list.html"><i class="bx bx-right-arrow-alt"></i>Контакты</a>
                         </li>
@@ -464,53 +450,70 @@
         <div class="page-wrapper">
             <div class="page-content">
                 {% block content %}
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th>Id пользователя</th>
-                                        <th>Имя Фамилия</th>
-                                        <th>Роли</th>
-                                        <th>email</th>
-                                        <th>Адрес</th>
-                                        <th>Сделать админом</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for user in users %}
+                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+                        <div class="card w-100">
+                            <h2>Галереи</h2>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead class="table-light">
                                         <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div>
-                                                        <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                                                    </div>
-                                                    <div class="ms-2">
-                                                        <h6 class="mb-0 font-14">{{ user.id }}</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>{{ user.getFirstName()}} {{ user.getSecondName() }}</td>
-                                            <td>{{ user.getRoles() | json_encode }}</td>
-                                            <td>{{ user.getEmail() }}</td>
-                                            <td>address</td>
-                                            <td>
-                                                <div class="d-flex order-actions">
-                                                    <a href="#" class=""><i class='bx bxs-edit'></i></a>
-                                                </div>
-                                            </td>
+                                            <th>Id галереи</th>
+                                            <th>Название</th>
+                                            <th>Изменить</th>
                                         </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        {% for gallery in galleries %}
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div>
+                                                            <input class="form-check-input me-3" type="checkbox"
+                                                                   value="" aria-label="...">
+                                                        </div>
+                                                        <div class="ms-2">
+                                                            <h6 class="mb-0 font-14">{{ gallery.id }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ gallery.title }}</td>
+                                                <td>
+                                                    <div class="d-flex order-actions">
+                                                        <a href="#" class=""><i class='bx-rename'></i></a>
+                                                        <a href="#" class=""><i class='ion-ios-remove'></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <a href="{{ path('admin_gallery_create') }}" class="btn btn-outline-light mt-3"><i
+                                                class="bx-book-add"></i>Добавить галерею</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!--end row-->
-                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
-
-
+                        <div class="card w-100">
+                            <h2>Фотографии</h2>
+                            <div class="row">
+                                {% for image in images %}
+                                    <div class="card w-25">
+                                        <div class="card-body">
+                                            <img src="{{ asset('uploads/gallery/') }}{{ image.fileName }}"
+                                                 alt="{{ image.title }}" class="img-thumbnail">
+                                            <h4>{{ image.title }}</h4>
+                                            <p>{{ image.description }}</p>
+                                            <div class="btn-block">
+                                                <a href="#" class="btn btn-outline-light">Изменить</a>
+                                                <a href="#" class="btn btn-outline-light">Удалить</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a href="{{ path('admin_image_create') }}" class="btn btn-outline-light mt-3"><i
+                                        class="bx-book-add"></i>Добавить фотографию</a>
+                        </div>
                     </div>
                     <!--end row-->
                 {% endblock %}
@@ -526,30 +529,4 @@
             <p class="mb-0">DF © 2022. All right reserved.</p>
         </footer>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    <script src="{{ asset('static/Admin/js/bootstrap.bundle.min.js') }}"></script>
-    <!--plugins-->
-    <script src="{{ asset('static/Admin/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('static/Admin/plugins/simplebar/js/simplebar.min.js') }}"></script>
-    <script src="{{ asset('static/Admin/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('static/Admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('static/Admin/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('static/Admin/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('static/Admin/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#Transaction-History').DataTable({
-                lengthMenu: [[6, 10, 20, -1], [6, 10, 20, 'Todos']]
-            });
-        } );
-    </script>
-    <script src="{{ asset('static/Admin/js/index.js') }}"></script>
-    <!--app JS-->
-    <script src="{{ asset('static/Admin/js/app.js') }}"></script>
-    <script>
-        new PerfectScrollbar('.product-list');
-        new PerfectScrollbar('.customers-list');
-    </script>
 {% endblock %}

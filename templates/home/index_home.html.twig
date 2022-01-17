@@ -605,112 +605,19 @@
                             <!-- Thumbnail list-->
                             <div class="utf-portfolio-grid row">
                                 <!-- Single item-->
+                                {% for image in images %}
                                 <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 brand ui"><a
-                                            class="portfolio-item" href="img/item-1.jpg" data-lightbox>
+                                            class="portfolio-item" href="#" data-lightbox>
                                         <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-1.jpg">
+                                                                                src="{{ asset('uploads/gallery/') }}{{ image.fileName }}">
                                             <div class="item-content">
-                                                <h6 class="utf-content-title">Creative Web Developer</h6>
-                                                <span class="content-more">Development</span>
+                                                <h6 class="utf-content-title">{{ image.title }}</h6>
+                                                <span class="content-more">Dev</span>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                                <!-- Single item-->
-                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 photos"><a
-                                            class="portfolio-item" href="img/item-2.jpg" data-lightbox>
-                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-2.jpg">
-                                            <div class="item-content">
-                                                <h6 class="utf-content-title">Creative & Digital Services</h6>
-                                                <span class="content-more">Logo Design</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Single item-->
-                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 brand"><a
-                                            class="portfolio-item" href="img/item-3.jpg" data-lightbox>
-                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-3.jpg">
-                                            <div class="item-content">
-                                                <h6 class="utf-content-title">Multimedia Marketing</h6>
-                                                <span class="content-more">Developer</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Single item-->
-                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 web ui"><a
-                                            class="portfolio-item" href="img/item-4.jpg" data-lightbox>
-                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-4.jpg">
-                                            <div class="item-content">
-                                                <h6 class="utf-content-title">Creative Web Designer</h6>
-                                                <span class="content-more">Freelancer</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Single item-->
-                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 web"><a
-                                            class="portfolio-item" href="img/item-5.jpg" data-lightbox>
-                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-5.jpg">
-                                            <div class="item-content">
-                                                <h6 class="utf-content-title">Creative Developer</h6>
-                                                <span class="content-more">Graphic Design</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Single item-->
-                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 photos ui"><a
-                                            class="portfolio-item" href="img/item-6.jpg" data-lightbox>
-                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-6.jpg">
-                                            <div class="item-content">
-                                                <h6 class="utf-content-title">Marketing Manager</h6>
-                                                <span class="content-more">Web Designer</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Single item-->
-                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 web"><a
-                                            class="portfolio-item" href="img/item-7.jpg" data-lightbox>
-                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-7.jpg">
-                                            <div class="item-content">
-                                                <h6 class="utf-content-title">Creative Developer</h6>
-                                                <span class="content-more">Graphic Design</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Single item-->
-                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 photos ui"><a
-                                            class="portfolio-item" href="img/item-8.jpg" data-lightbox>
-                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-8.jpg">
-                                            <div class="item-content">
-                                                <h6 class="utf-content-title">Marketing Manager</h6>
-                                                <span class="content-more">Web Designer</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <!-- Single item-->
-                                <div class="single-item col-12 col-lg-4 col-sm-6 col-xs-12 web ui"><a
-                                            class="portfolio-item" href="img/item-9.jpg" data-lightbox>
-                                        <div class="utf-portfolio-wrapper"><img class="img-fluid" alt="Item"
-                                                                                src="img/item-9.jpg">
-                                            <div class="item-content">
-                                                <h6 class="utf-content-title">Creative Web Designer</h6>
-                                                <span class="content-more">Freelancer</span>
-                                            </div>
-                                        </div>
-                                    </a>
+                                {% endfor %}
                                 </div>
                             </div>
                         </div>

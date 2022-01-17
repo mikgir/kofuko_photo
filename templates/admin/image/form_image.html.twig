@@ -1,0 +1,27 @@
+{% extends 'admin/index_admin.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    {% block content %}
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <h2>Добавить Фотографию</h2>
+                <div class="col-md">
+                    <div class="card">
+                        <div class="card-body">
+                            {{ form_start(image_form) }}
+                            {{ form_row(image_form.gallery) }}
+                            {{ form_row(image_form.title) }}
+                            {{ form_row(image_form.description) }}
+                            {{ form_row(image_form.file_name) }}
+                            {{ form_row(image_form.save) }}
+                            {{ form_end(image_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+{% endblock %}

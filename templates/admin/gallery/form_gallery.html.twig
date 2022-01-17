@@ -1,0 +1,22 @@
+{% extends 'admin/index_admin.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <h2>Добавить галерею</h2>
+                <div class="card">
+                    <div class="card-body">
+                        {{ form_start(gallery_form) }}
+                        {{ form_row(gallery_form.title) }}
+                        {{ form_row(gallery_form.save) }}
+                        {{ form_end(gallery_form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+{% endblock %}

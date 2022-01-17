@@ -1,0 +1,22 @@
+{% extends 'admin/index_admin.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <ul>
+                    {% for gallery in galleries %}
+                        <li>{{ gallery.id }} | {{ gallery.title }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+    {% endblock %}
+{% endblock %}
