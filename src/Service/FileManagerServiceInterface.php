@@ -18,5 +18,17 @@ interface FileManagerServiceInterface
      */
     public function removeGalleryImage(string $fileName);
 
+    /**
+     * @param UploadedFile $file
+     * @return string
+     */
+    public function imageBlogUpload(UploadedFile $file): string;
+
+    /**
+     * @param string $fileName
+     * @return mixed
+     */
+    public function removeBlogImage(string $fileName);
+
 
 }
