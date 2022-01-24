@@ -10,39 +10,61 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image
 {
+    private const IS_PUBLISHED = 1;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private string $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=Gallery::class)
      */
-    private $gallery;
+    private Gallery $gallery;
 
     /**
      * @ORM\Column(type="string", length=500)
      */
-    private $file_name;
+    private string $file_name;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private \DateTimeInterface $uploaded_at;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private \DateTimeInterface $updated_at;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $is_published;
+
+    public function __construct()
+    {
+        $this->uploaded_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTimeImmutable();
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -66,7 +88,7 @@ class Image
         return $this;
     }
 
-    public function getGallery(): ?Gallery
+    public function getGallery(): Gallery
     {
         return $this->gallery;
     }
@@ -78,7 +100,7 @@ class Image
         return $this;
     }
 
-    public function getFileName(): ?string
+    public function getFileName(): string
     {
         return $this->file_name;
     }
@@ -86,6 +108,42 @@ class Image
     public function setFileName(string $file_name): self
     {
         $this->file_name = $file_name;
+
+        return $this;
+    }
+
+    public function getUploadedAt(): \DateTimeInterface
+    {
+        return $this->uploaded_at;
+    }
+
+    public function setUploadedAt(\DateTimeInterface $uploaded_at): self
+    {
+        $this->uploaded_at = $uploaded_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): \DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->is_published;
+    }
+
+    public function setIsPublished(bool $is_published): self
+    {
+        $this->is_published = self::IS_PUBLISHED;
 
         return $this;
     }

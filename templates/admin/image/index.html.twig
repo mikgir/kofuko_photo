@@ -29,6 +29,8 @@
                             <tr>
                                 <th>Id галереи</th>
                                 <th>Название</th>
+                                <th>Создана</th>
+                                <th>Изменена</th>
                                 <th>Изменить</th>
                             </tr>
                             </thead>
@@ -47,6 +49,8 @@
                                         </div>
                                     </td>
                                     <td>{{ gallery.title }}</td>
+                                    <td>00.00.0000</td>
+                                    <td>00.00.0000</td>
                                     <td>
                                         <div class="d-flex order-actions">
                                             <a href="{{ path('admin_gallery_delete', {'id': gallery.id}) }}" class="m-2"><i class='lni lni-ban'></i></a>
