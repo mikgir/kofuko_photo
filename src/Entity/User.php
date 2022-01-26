@@ -57,19 +57,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private ?\DateTimeImmutable $registered_at;
+    private \DateTimeInterface $registered_at;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private ?\DateTimeImmutable $updated_at;
+    private \DateTimeInterface $updated_at;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private string $avatar_img;
+
+    public function __construct()
+    {
+        $this->registered_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTimeImmutable();
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -88,7 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -96,7 +107,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -163,7 +174,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstName(): string
     {
         return $this->first_name;
     }
@@ -187,7 +198,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBirthdayAt(): ?\DateTimeImmutable
+    public function getBirthdayAt(): \DateTimeImmutable
     {
         return $this->birthday_at;
     }
@@ -199,27 +210,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRegisteredAt(): ?\DateTimeImmutable
+    public function getRegisteredAt(): \DateTimeInterface
     {
         return $this->registered_at;
     }
 
-    public function setRegisteredAt(\DateTimeImmutable $registered_at): self
+    public function setRegisteredAt(\DateTimeInterface $registered_at): self
     {
         $this->registered_at = $registered_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updated_at): self
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
         return $this;
     }
+    public function setAvatarImg(?string $avatar_img): self
+    {
+        $this->avatar_img = $avatar_img;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAvatarImg(): ?string
+    {
+        return $this->avatar_img;
+    }
+
+
 }

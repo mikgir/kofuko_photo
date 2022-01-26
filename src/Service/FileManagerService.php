@@ -11,11 +11,13 @@ class FileManagerService implements FileManagerServiceInterface
 {
     private $galleryImageDirectory;
     private $blogImageDirectory;
+    private $avatarImageDirectory;
 
-    public function __construct($galleryImageDirectory, $blogImageDirectory)
+    public function __construct($galleryImageDirectory, $blogImageDirectory, $avatarImageDirectory)
     {
         $this->galleryImageDirectory = $galleryImageDirectory;
         $this->blogImageDirectory = $blogImageDirectory;
+        $this->avatarImageDirectory = $avatarImageDirectory;
     }
 
     /**
@@ -69,6 +71,32 @@ class FileManagerService implements FileManagerServiceInterface
     {
         $fileSystem = new Filesystem();
         $fileImage = $this->getBlogImageDirectory() . '/' . $fileName;
+        try {
+            $fileSystem->remove($fileImage);
+        } catch (IOExceptionInterface $exception) {
+            return $exception->getMessage();
+        }
+        return $this;
+    }
+
+    public function getAvatarImageDirectory()
+    {
+        return $this->avatarImageDirectory;
+    }
+    public function imageAvatarUpload(UploadedFile $file): string
+    {
+        $fileName = uniqid() . '.' . $file->guessExtension();
+        try {
+            $file->move($this->getAvatarImageDirectory(), $fileName);
+        } catch (FileException $exception) {
+            return $exception;
+        }
+        return $fileName;
+    }
+    public function removeAvatarImage(string $fileName)
+    {
+        $fileSystem = new Filesystem();
+        $fileImage = $this->getAvatarImageDirectory() . '/' . $fileName;
         try {
             $fileSystem->remove($fileImage);
         } catch (IOExceptionInterface $exception) {

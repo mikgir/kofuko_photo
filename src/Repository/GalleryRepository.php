@@ -36,6 +36,8 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     public function setCreateGallery(Gallery $gallery): object
     {
         $gallery->setTitle();
+        $gallery->setCreatedAt(date_create_immutable());
+        $gallery->setUpdatedAt(date_create_immutable());
         $this->entityManager->persist($gallery);
         $this->entityManager->flush();
         return $gallery;
@@ -44,6 +46,7 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     public function setUpdateGallery(Gallery $gallery): object
     {
         $gallery->setTitle();
+        $gallery->setUpdatedAt(date_create_immutable());
         $this->entityManager->flush();
         return $gallery;
 

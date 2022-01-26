@@ -3,8 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Service\FileManagerServiceInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -15,10 +18,17 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private $entityManager;
+    private $serviceManager;
+
+    public function __construct(ManagerRegistry             $registry,
+                                EntityManagerInterface      $entityManager,
+                                FileManagerServiceInterface $serviceManager)
     {
+        $this->entityManager = $entityManager;
+        $this->serviceManager = $serviceManager;
         parent::__construct($registry, User::class);
     }
 
@@ -35,6 +45,74 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
+    public function getAllUsers(): array
+    {
+        return parent::findAll();
+    }
+
+    /**
+     * @param $id
+     * @return User
+     */
+    public function getOneUser($id): object
+    {
+        return parent::find($id);
+    }
+
+    /**
+     * @param User $user
+     * @param UploadedFile $file
+     * @return User
+     */
+    public function setCreateUser(User $user, UploadedFile $file): object
+    {
+        if ($file) {
+            $fileName = $this->serviceManager->imageAvatarUpload($file);
+            $user->setAvatarImg($fileName);
+        }
+        $user->setRoles(['ROLE_USER']);
+        $user->setRegisteredAt(date_create_immutable());
+        $user->setUpdatedAt(date_create_immutable());
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        return $user;
+    }
+
+    /**
+     * @param User $user
+     * @param UploadedFile $file
+     * @return User
+     */
+    public function setUpdateUser(User $user, UploadedFile $file): object
+    {
+        if ($file) {
+            $fileName = $user->getAvatarImg();
+            if ($fileName) {
+                $this->serviceManager->removeAvatarImage($fileName);
+            }
+            $fileName = $this->serviceManager->imageAvatarUpload($file);
+            $user->setAvatarImg($fileName);
+        }
+        $user->setUpdatedAt(date_create_immutable());
+        $this->entityManager->flush();
+        return $user;
+    }
+
+    /**
+     * @param User $user
+     * @param $fileName
+     */
+    public function setDeleteUser(User $user, $fileName)
+    {
+        $fileName = $user->getAvatarImg();
+        if ($fileName) {
+            $this->serviceManager->removeAvatarImage($fileName);
+        }
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+    }
+
 
     // /**
     //  * @return User[] Returns an array of User objects

@@ -6,6 +6,7 @@
 parameters:
     gallery_image_directory: '%kernel.project_dir%\public\uploads\gallery'
     blog_image_directory: '%kernel.project_dir%\public\uploads\blogs'
+    avatar_image_directory: '%kernel.project_dir%\public\uploads\avatar'
 
 services:
     # default configuration for services in *this* file
@@ -29,4 +30,5 @@ services:
         arguments:
             $galleryImageDirectory: '%gallery_image_directory%'
             $blogImageDirectory: '%blog_image_directory%'
+            $avatarImageDirectory: '%avatar_image_directory%'
 
