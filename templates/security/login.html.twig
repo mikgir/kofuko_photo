@@ -20,6 +20,7 @@
 {% endblock %}
 
 {% block body %}
+    <body>
     <!-- Preloader-->
     <div class="preloader" style="display:block;">
         <div class="spinner"></div>
@@ -30,7 +31,8 @@
     <nav class="navbar-expand-md navbar" id="navbar">
         <a class="navbar-brand" data-scroll="" href="{{ path('home') }}">
             <!-- Navbar Logo-->
-            <img class="img-fluid" src="{{ asset('static/img/1KOFUKU_logo.png') }}" alt="Logo" style="width: 145px; height: 60px;"></a>
+            <img class="img-fluid" src="{{ asset('static/img/1KOFUKU_logo.png') }}" alt="Logo"
+                 style="width: 145px; height: 60px;"></a>
         <span class="navbar-menu ml-auto" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" role="button">
             <span class="btn-line"></span></span>
@@ -51,7 +53,8 @@
                     <h2 class="utf-section-title text-center">Log <span
                                 class="featured"><span> IN</span></span></h2>
                     <div class="animated-bar"></div>
-                    <p class="text-max-700 text-center">У Вас еще нет аккаунта? Регистрация <a href="{{ path('app_register') }}">ЗДЕСЬ</a></p>
+                    <p class="text-max-700 text-center">У Вас еще нет аккаунта? Регистрация <a
+                                href="{{ path('app_register') }}">ЗДЕСЬ</a></p>
                 </div>
             </div>
         </div>
@@ -102,32 +105,34 @@
         </div>
     </div>
 
-{% endblock %}
-{% block javascripts %}
-    <!-- Scripts-->
-    <script src="{{ asset('static/js/jquery-3.4.1.min.js') }}"></script>
-    <script src="{{ asset('static/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('static/js/animatedModal.js') }}"></script>
-    <script src="{{ asset('static/js/tiny-slider.js') }}"></script>
-    <script src="{{ asset('static/js/lity.min.js') }}"></script>
-    <script src="{{ asset('static/js/simplebar.min.js') }}"></script>
-    <script src="{{ asset('static/js/jquery.mb.YTPlayer.min.js') }}"></script>
-    <script src="{{ asset('static/js/custom_jquery.js') }}"></script>
-    <!--Map Js-->
-    <script src="{{ asset('static/js/map.js') }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4JwWo5VPt9WyNp3Ne2uc2FMGEePHpqJ8&callback=initMap"
-            async="" defer=""></script>
-    <script>
-        //Ajax contact
-        var form = $('.contact-form');
-        form.submit(function () {
-            $this = $(this);
-            $.post($(this).attr('action'), function (data) {
-                $this.prev().text(data.message).fadeIn().delay(500).fadeOut();
-            }, 'json');
-            return false;
-        });
-    </script>
+    {% block javascripts %}
+        <!-- Scripts-->
+        <script src="{{ asset('static/js/jquery-3.4.1.min.js') }}"></script>
+        <script src="{{ asset('static/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
+        <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
+        <script src="{{ asset('static/js/animatedModal.js') }}"></script>
+        <script src="{{ asset('static/js/tiny-slider.js') }}"></script>
+        <script src="{{ asset('static/js/lity.min.js') }}"></script>
+        <script src="{{ asset('static/js/simplebar.min.js') }}"></script>
+        <script src="{{ asset('static/js/jquery.mb.YTPlayer.min.js') }}"></script>
+        <script src="{{ asset('static/js/custom_jquery.js') }}"></script>
+        <!--Map Js-->
+        <script src="{{ asset('static/js/map.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4JwWo5VPt9WyNp3Ne2uc2FMGEePHpqJ8&callback=initMap"
+                async="" defer=""></script>
+        <script>
+            //Ajax contact
+            var form = $('.contact-form');
+            form.submit(function () {
+                $this = $(this);
+                $.post($(this).attr('action'), function (data) {
+                    $this.prev().text(data.message).fadeIn().delay(500).fadeOut();
+                }, 'json');
+                return false;
+            });
+        </script>
+    {% endblock %}
+
+    </body>
 {% endblock %}

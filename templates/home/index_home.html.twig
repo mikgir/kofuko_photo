@@ -20,66 +20,70 @@
 
 {% endblock %}
 {% block body %}
+    <body>
     <!-- Preloader-->
     <div class="preloader" style="display:block;">
         <div class="spinner"></div>
     </div>
     <div id="overlay-effect"></div>
-    {% block content %}
-    <!-- Navbar-->
-    <nav class="navbar-expand-md navbar fixed-top" id="navbar">
-        <a class="navbar-brand" data-scroll="" href="{{ path('home') }}">
-            <!-- Navbar Logo-->
-            <img class="img-fluid" src="{{ asset('static/img/1KOFUKU_logo.png') }}" alt="Logo"
-                 style="width: 145px; height: 60px;"></a>
-        <span class="navbar-menu ml-auto" data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" role="button">
+    {% block nav %}
+        <!-- Navbar-->
+        <nav class="navbar-expand-md navbar fixed-top" id="navbar">
+            <a class="navbar-brand" data-scroll="" href="{{ path('home') }}">
+                <!-- Navbar Logo-->
+                <img class="img-fluid" src="{{ asset('static/img/1KOFUKU_logo.png') }}" alt="Logo"
+                     style="width: 145px; height: 60px;"></a>
+            <span class="navbar-menu ml-auto" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                  role="button">
             <span class="btn-line"></span></span>
-        <div class="collapse navbar-collapse order-1 order-lg-0" id="navbarSupportedContent">
-            <!-- Navbar menu-->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="#about">ОБО МНЕ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#portfolio">МОИ РАБОТЫ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#blog">БЛОГ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">КОНТАКТЫ</a></li>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li class="nav-item d-flex">
-                        <div class="user-box dropdown">
-                            <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret"
-                               href="{{ path('user_profile') }}"
-                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ion-md-person"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-user"></i><span>профиль</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <i class='bx bx-download'></i><span>файлы</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider mb-0"></div>
-                                </li>
-                                <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i
-                                                class='bx bx-log-out-circle'></i><span>выход</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a class="nav-link" href="{{ path('app_logout') }}"><i class="ion-md-log-out"></i></a>
-                    </li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">
-                            <i class="ion-md-log-in"></i></a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-
+            <div class="collapse navbar-collapse order-1 order-lg-0" id="navbarSupportedContent">
+                <!-- Navbar menu-->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">ОБО МНЕ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">МОИ РАБОТЫ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blog">БЛОГ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">КОНТАКТЫ</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li class="nav-item d-flex">
+                            <div class="user-box dropdown">
+                                <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret"
+                                   href="{{ path('user_profile') }}"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ion-md-person"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-user"></i><span>профиль</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            <i class='bx bx-download'></i><span>файлы</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider mb-0"></div>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i
+                                                    class='bx bx-log-out-circle'></i><span>выход</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a class="nav-link" href="{{ path('app_logout') }}"><i class="ion-md-log-out"></i></a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">
+                                <i class="ion-md-log-in"></i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block content %}
         <!-- Home-->
+{# TODO сделать зум на слайдер #}
         <section class="hero-area-block hero-area-left-img-block element-cover-bg" id="home"
                  style="background-image:url({{ asset('static/img/bg-img/obektiv-foto.png') }})">
             <div id="carouselExampleSlidesOnly" class="carousel slide position-absolute"
@@ -134,6 +138,7 @@
                                                     class="featured"><span>Info</span></span>
                                         </h2>
                                         <div class="animated-bar"></div>
+{# TODO edit original text#}
                                         <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed
                                             do
                                             eiusmod tempor incididunt ut labore et d magna aliqua enim sed do sit.</p>
@@ -171,6 +176,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12 col-md-6 single-info"><span>Email:</span>
+{# TODO edit owne email #}
                                                         <p><a href="mailto:info@example.com">info@example.com</a></p>
                                                     </div>
                                                     <div class="col-12 col-md-6 single-info"><span>Адрес:</span>
@@ -190,6 +196,7 @@
                                                         <p>Ногинский Колледж</p>
                                                     </div>
                                                     <div class="col-12 col-md-6 single-info"><span>Website:</span>
+{# TODO edit owne website #}
                                                         <p><a href="#">www.mywebsite.com</a></p>
                                                     </div>
                                                 </div>
@@ -210,14 +217,17 @@
                                                 </ul>
                                             </div>
                                             <div class="d-block d-sm-flex align-items-center">
+{# TODO download CV#}
                                                 <a class="btn content-download button-main button-scheme" href="#"
                                                    role="button">Download CV <i
                                                             class="plan-icon icon ion-md-cloud-download"></i></a>
+{# TODO something with button #}
                                                 <a class="btn content-download button-main button-scheme" href="#"
                                                    role="button">HIRE ME! <i class="plan-icon icon ion-md-document"></i></a>
                                             </div>
                                         </div>
                                     </div>
+{# TODO chenge cards content #}
                                     <div class="pt-5 mt-lg-0">
                                         <div class="row">
                                             <div class="col-6 col-lg-2 col-sm-4 col-xs-12">
@@ -266,6 +276,7 @@
                                             <h2 class="utf-section-title">What I Do <span
                                                         class="featured"><span>Services</span></span></h2>
                                             <div class="animated-bar"></div>
+{# TODO edit original text #}
                                             <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit,
                                                 sed
                                                 do eiusmod tempor incididunt ut labore et d magna aliqua enim sed do
@@ -279,6 +290,7 @@
                                         <div class="utf-single-service"><i
                                                     class="icon service-icon ion-logo-buffer"></i>
                                             <h6 class="utf-service-title">Creative Designer</h6>
+{# TODO edit original text#}
                                             <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
                                                 incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
                                             <i class="icon service-icon-down ion-logo-buffer"></i>
@@ -288,6 +300,7 @@
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <div class="utf-single-service"><i class="icon service-icon ion-ios-bug"></i>
                                             <h6 class="utf-service-title">User Experience</h6>
+{# TODO edit original text #}
                                             <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
                                                 incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
                                             <i class="icon service-icon-down ion-ios-bug"></i>
@@ -298,6 +311,7 @@
                                         <div class="utf-single-service"><i
                                                     class="icon service-icon ion-md-basketball"></i>
                                             <h6 class="utf-service-title">Branding Design</h6>
+{# TODO edit original text#}
                                             <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
                                                 incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
                                             <i class="icon service-icon-down ion-md-basketball"></i>
@@ -308,6 +322,7 @@
                                         <div class="utf-single-service mb-bt-0"><i
                                                     class="icon service-icon ion-md-clipboard"></i>
                                             <h6 class="utf-service-title">UI/UX Design</h6>
+{# TODO edit original text#}
                                             <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
                                                 incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
                                             <i class="icon service-icon-down ion-md-clipboard"></i>
@@ -318,6 +333,7 @@
                                         <div class="utf-single-service mb-bt-0"><i
                                                     class="icon service-icon ion-ios-bulb"></i>
                                             <h6 class="utf-service-title">Software Engineers</h6>
+{# TODO edit original text#}
                                             <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
                                                 incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
                                             <i class="icon service-icon-down ion-ios-bulb"></i>
@@ -328,6 +344,7 @@
                                         <div class="utf-single-service mb-bt-0"><i
                                                     class="icon service-icon ion-ios-contact"></i>
                                             <h6 class="utf-service-title">Media Marketing</h6>
+{# TODO edit original text#}
                                             <p class="utf-service-description">Lorem ipsum dolor sit amet, consect
                                                 incididunt ut labore et d magna aliqua Ut enim ad sed do sit...</p>
                                             <i class="icon service-icon-down ion-ios-contact"></i>
@@ -343,6 +360,7 @@
                                             <h2 class="utf-section-title">Clients <span
                                                         class="featured"><span>Say</span></span></h2>
                                             <div class="animated-bar"></div>
+{# TODO edit users comments (array)#}
                                             <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit,
                                                 sed
                                                 do eiusmod tempor incididunt ut labore et d magna aliqua enim sed do
@@ -351,6 +369,7 @@
                                     </div>
                                 </div>
                                 <div class="utf-testimonial-slider">
+{# TODO users comment item#}
                                     <div class="utf-slider-item">
                                         <!-- Single review-->
                                         <div class="utf-single-review utf-swiper-slide">
@@ -474,6 +493,7 @@
                                 </div>
                             </div>
                             <!-- Pricing section-->
+{# TODO edit pricing plans#}
                             <div class="utf-pricing-section utf-single-section">
                                 <div class="row">
                                     <div class="col-12">
@@ -618,6 +638,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
+{# TODO change to original text#}
                             <div class="inner text-center"><span>Web Designer & Web Developer</span>
                                 <h2>Start You Business With Us</h2>
                                 <a class="contact-to-action mt-4" href="#contact"><span>Contact Us</span></a>
@@ -645,6 +666,7 @@
                                         <h2 class="utf-section-title">My <span
                                                     class="featured"><span>Portfolio</span></span></h2>
                                         <div class="animated-bar"></div>
+{# TODO edit original text#}
                                         <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed
                                             do
                                             eiusmod tempor incididunt ut labore et d magna aliqua enim sed do sit.</p>
@@ -655,6 +677,7 @@
                             <div class="utf-portfolio-section utf-single-section">
                                 <div class="row">
                                     <!-- Filter nav-->
+{# TODO filter by galleries#}
                                     <div class="col-12">
                                         <ul class="list-inline filter-control" role="group" aria-label="Filter Control">
                                             <li class="list-inline-item tab-active" data-filter="*">All</li>
@@ -704,6 +727,7 @@
                                         <h2 class="utf-section-title">Latest <span
                                                     class="featured"><span>Blog Post</span></span></h2>
                                         <div class="animated-bar"></div>
+{# TODO edit original text#}
                                         <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed
                                             do
                                             eiusmod tempor incididunt ut labore et d magna aliqua enim sed do sit.</p>
@@ -713,120 +737,26 @@
                             <!-- Blog section-->
                             <div class="utf-blog-section utf-single-section">
                                 <div class="row justify-content-center">
-                                    <!-- Single post-->
-                                    <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
-                                        <div class="card single-post">
-                                            <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
-                                                                                                src="img/post-1.jpg"
-                                                                                                alt="Blog post"><span
-                                                        class="content-date">15 Jan, 2020</span></a>
-                                            <div class="card-body post-content">
-                                                <div class="blog-post-user">By, John Doe</div>
-                                                <div class="blog-post-tage">Web Designer</div>
-                                                <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">
-                                                        The
-                                                        Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
-                                                <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
-                                                    alias id, repellendus magni, quas.</p>
+                                    {% for blog in blogs %}
+                                        <!-- Single post-->
+                                        <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
+                                            <div class="card single-post">
+                                                <a class="post-img" href="{{ path('blog', { 'id': blog.id }) }}"><img
+                                                            class="card-img-top" style="width: 372px; height: 248px"
+                                                            src="{{ asset('uploads/blogs/') }}{{ blog.image }}"
+                                                            alt="Blog post"><span
+                                                            class="content-date">{{ blog.createdAt | date }}</span></a>
+                                                <div class="card-body post-content">
+                                                    <div class="blog-post-user">Name</div>
+                                                    <div class="blog-post-tage"></div>
+                                                    <a href="blog-post-dark.html"><h5
+                                                                class="card-title utf-content-title">{{ blog.title }}</h5>
+                                                    </a>
+                                                    <p class="card-text utf-content-description">{{ blog.content }}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- Single post-->
-                                    <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
-                                        <div class="card single-post">
-                                            <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
-                                                                                                src="img/post-2.jpg"
-                                                                                                alt="Blog post"><span
-                                                        class="content-date">15 Jan, 2020</span></a>
-                                            <div class="card-body post-content">
-                                                <div class="blog-post-user">By, John Doe</div>
-                                                <div class="blog-post-tage">Photographer</div>
-                                                <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">
-                                                        The
-                                                        Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
-                                                <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
-                                                    alias id, repellendus magni, quas.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single post-->
-                                    <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
-                                        <div class="card single-post">
-                                            <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
-                                                                                                src="img/post-3.jpg"
-                                                                                                alt="Blog post"><span
-                                                        class="content-date">15 Jan, 2020</span></a>
-                                            <div class="card-body post-content">
-                                                <div class="blog-post-user">By, John Doe</div>
-                                                <div class="blog-post-tage">Marketing</div>
-                                                <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">
-                                                        The
-                                                        Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
-                                                <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
-                                                    alias id, repellendus magni, quas.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single post-->
-                                    <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
-                                        <div class="card single-post">
-                                            <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
-                                                                                                src="img/post-4.jpg"
-                                                                                                alt="Blog post"><span
-                                                        class="content-date">15 Jan, 2020</span></a>
-                                            <div class="card-body post-content">
-                                                <div class="blog-post-user">By, John Doe</div>
-                                                <div class="blog-post-tage">UI/UX Designer</div>
-                                                <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">
-                                                        The
-                                                        Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
-                                                <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
-                                                    alias id, repellendus magni, quas.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single post-->
-                                    <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
-                                        <div class="card single-post">
-                                            <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
-                                                                                                src="img/post-5.jpg"
-                                                                                                alt="Blog post"><span
-                                                        class="content-date">15 Jan, 2020</span></a>
-                                            <div class="card-body post-content">
-                                                <div class="blog-post-user">By, John Doe</div>
-                                                <div class="blog-post-tage">Wordpress</div>
-                                                <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">
-                                                        The
-                                                        Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
-                                                <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
-                                                    alias id, repellendus magni, quas.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single post-->
-                                    <div class="col-12 col-lg-4 col-sm-6 col-xs-12">
-                                        <div class="card single-post">
-                                            <a class="post-img" href="blog-post-dark.html"><img class="card-img-top"
-                                                                                                src="img/post-6.jpg"
-                                                                                                alt="Blog post"><span
-                                                        class="content-date">15 Jan, 2020</span></a>
-                                            <div class="card-body post-content">
-                                                <div class="blog-post-user">By, John Doe</div>
-                                                <div class="blog-post-tage">Graphic Design</div>
-                                                <a href="blog-post-dark.html"><h5 class="card-title utf-content-title">
-                                                        The
-                                                        Most Popular Blog Post & Top Digital Eorld Places...</h5></a>
-                                                <p class="card-text utf-content-description">Lorem ipsum dolor sit amet,
-                                                    consectetur adipisicing elit. Dolore, porro rem quod illo quam, eum
-                                                    alias id, repellendus magni, quas.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -850,6 +780,7 @@
                                         <h2 class="utf-section-title">Get In <span
                                                     class="featured"><span>Touch</span></span></h2>
                                         <div class="animated-bar"></div>
+{# TODO edit original text & change contact data#}
                                         <p class="text-max-700">Lorem ipsum dolor sit amet, consect adipisic elit, sed
                                             do
                                             eiusmod tempor incididunt ut labore et d magna aliqua enim sed do sit.</p>
@@ -909,6 +840,7 @@
                                         </div>
                                     </div>
                                     <!-- Contact form-->
+{# TODO edit contact form#}
                                     <div class="col-12 col-lg-7">
                                         <form class="contact-form" id="contact-form" name="contact-form" method="post"
                                               action="sendemail.php" role="form">
@@ -969,29 +901,31 @@
             </div>
         </div>
     {% endblock %}
-{% endblock %}
-{% block javascripts %}
-    <!-- Scripts-->
-    <script src="{{ asset('static/js/jquery-3.4.1.min.js') }}"></script>
-    <script src="{{ asset('static/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('static/js/animatedModal.js') }}"></script>
-    <script src="{{ asset('static/js/tiny-slider.js') }}"></script>
-    <script src="{{ asset('static/js/lity.min.js') }}"></script>
-    <script src="{{ asset('static/js/simplebar.min.js') }}"></script>
-    <script src="{{ asset('static/js/jquery.mb.YTPlayer.min.js') }}"></script>
-    <script src="{{ asset('static/js/custom_jquery.js') }}"></script>
-    <!--Map Js-->
-    <script src="{{ asset('static/js/map.js') }}"></script>
-    <script>
-        //Ajax contact
-        var form = $('.contact-form');
-        form.submit(function () {
-            $this = $(this);
-            $.post($(this).attr('action'), function (data) {
-                $this.prev().text(data.message).fadeIn().delay(500).fadeOut();
-            }, 'json');
-            return false;
-        });
-    </script>
+    {% block javascripts %}
+        <!-- Scripts-->
+        <script src="{{ asset('static/js/jquery-3.4.1.min.js') }}"></script>
+        <script src="{{ asset('static/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('static/js/isotope.pkgd.min.js') }}"></script>
+        <script src="{{ asset('static/js/animatedModal.js') }}"></script>
+        <script src="{{ asset('static/js/tiny-slider.js') }}"></script>
+        <script src="{{ asset('static/js/lity.min.js') }}"></script>
+        <script src="{{ asset('static/js/simplebar.min.js') }}"></script>
+        <script src="{{ asset('static/js/jquery.mb.YTPlayer.min.js') }}"></script>
+        <script src="{{ asset('static/js/custom_jquery.js') }}"></script>
+        <!--Map Js-->
+        <script src="{{ asset('static/js/map.js') }}"></script>
+        <script>
+            //Ajax contact
+            var form = $('.contact-form');
+            form.submit(function () {
+                $this = $(this);
+                $.post($(this).attr('action'), function (data) {
+                    $this.prev().text(data.message).fadeIn().delay(500).fadeOut();
+                }, 'json');
+                return false;
+            });
+        </script>
+    {% endblock %}
+    </body>
+
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,10 +17,12 @@ class AdminController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $users = $entityManager->getRepository(User::class)->findAll();
+        $tasks = $entityManager->getRepository(Task::class)->findAll();
 
         $forRender = [
             'title' => 'admin page',
-            'users' => $users
+            'users' => $users,
+            'tasks' => $tasks
         ];
         return $this->render('admin/index_admin.html.twig', $forRender);
     }

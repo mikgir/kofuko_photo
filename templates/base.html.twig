@@ -11,8 +11,8 @@
 
 
     </head>
-    <body class="bg-theme bg-theme2">
-        {% block body %}{% endblock %}
+    {% block body %}
+    <body>
 
 
         {% block javascripts %}
@@ -20,4 +20,6 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
+    {% endblock %}
+
 </html>
