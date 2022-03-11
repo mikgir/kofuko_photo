@@ -20,12 +20,12 @@ class Task
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $title;
+    private string $title;
 
     /**
      * @ORM\Column(type="text")
      */
-    private ?string $description;
+    private string $description;
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,12 +37,17 @@ class Task
      */
     private ?\DateTimeInterface $dueDate;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private ?\DateTimeInterface $updated_at;
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -54,7 +59,7 @@ class Task
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -73,7 +78,7 @@ class Task
 
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
-        $this->created_at = new \DateTimeImmutable('now');
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -86,6 +91,18 @@ class Task
     public function setDueDate(\DateTimeInterface $dueDate): self
     {
         $this->dueDate = $dueDate;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

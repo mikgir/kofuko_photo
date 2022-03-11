@@ -92,13 +92,8 @@
                         </div>
                         <div class="search-bar flex-grow-1">
                             <div class="position-relative search-bar-box">
-                                <label>
-                                    <input type="text" class="form-control search-control"
-                                           placeholder="Type to search...">
-                                </label> <span class="position-absolute top-50 search-show translate-middle-y"><i
-                                            class='bx bx-search'></i></span>
-                                <span class="position-absolute top-50 search-close translate-middle-y"><i
-                                            class='bx bx-x'></i></span>
+                                <input type="text" class="form-control search-control" placeholder="Type to search..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span>
+                                <span class="position-absolute top-50 search-close translate-middle-y"><i class='bx bx-x'></i></span>
                             </div>
                         </div>
                         <div class="top-menu ms-auto">
@@ -505,7 +500,7 @@
             </header>
             <!--end header -->
             <!--start page wrapper -->
-            <div class="page-wrapper h-100" style="flex: 0 1 auto; min-height: 90vh">
+            <div class="page-wrapper h-100" style="flex: 0 1 auto; min-height: 87vh">
                 <div class="page-content">
                     {% block content %}
                         {# TODO statistic users activity #}
@@ -543,7 +538,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center">{{ task.title }}</td>
-                                                <td class="text-wrap w-50">{{ task.description }}</td>
+                                                <td class="text-center text-wrap w-50">{{ task.description }}</td>
                                                 <td class="text-center">
                                                     <div class="ms-2">
                                                         <h6 class="text-center">{{ task.dueDate | date }}</h6>
@@ -551,8 +546,8 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="d-flex order-actions justify-content-around">
-                                                        <a href="#" class=""><i class='bx bxs-edit'></i></a>
-                                                        <a href="#" class=""><i class='bx bxs-edit'></i></a>
+                                                        <a href="{{ path('admin_todo_update', {'id': task.id}) }}" class=""><i class='bx bxs-edit'></i></a>
+                                                        <a href="{{ path('admin_todo_delete', {'id': task.id}) }}" class=""><i class='bx bxs-x-circle'></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -610,7 +605,7 @@
                                                 <td class="text-center">{{ user.updatedAt | date }}</td>
 
                                                 <td class="text-center">
-                                                    <div class="d-flex order-actions">
+                                                    <div class="d-flex order-actions justify-content-around">
                                                         <a href="#" class=""><i class='bx bxs-edit'></i></a>
                                                     </div>
                                                 </td>

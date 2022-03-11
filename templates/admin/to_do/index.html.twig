@@ -54,8 +54,8 @@
                                             <div class="accordion-body">	<strong>Создано: {{ task.createdAt | date }}</strong>
                                             <p>{{ task.description }}</p>
                                                 <div class="flex-nowrap">
-                                                    <a href="" type="button" class="btn btn-light w-25 mb-5">изменить</a>
-                                                    <a href="" type="button" class="btn btn-light w-25 mb-5">удалить</a>
+                                                    <a href="{{ path('admin_todo_update', {'id': task.id}) }}" type="button" class="btn btn-light w-25 mb-5">изменить</a>
+                                                    <a href="{{ path('admin_todo_delete', {'id': task.id}) }}" type="button" class="btn btn-light w-25 mb-5">удалить</a>
                                                 </div>
                                             </div>
                                         </div>

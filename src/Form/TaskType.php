@@ -36,8 +36,7 @@ class TaskType extends AbstractType
                 'attr'=>array(
                     'class'=>'btn btn-outline-light mt-3 w-100'
                 )
-            ))
-        ;
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void
